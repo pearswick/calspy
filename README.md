@@ -2,7 +2,7 @@
 
 calspy is a tool for investigative journalists and OSINT researchers to scrape events from a public Google Calendar. It works by mimicking human action in a web browser, automating the process of clicking through each month to find events. To avoid scraping until the dawn of time,calspy stops scraping when it has found 18 consecutive months with no events.
 
-![calspy screenshot](screenshots/calspy.png)
+![calspy screenshot](screenshots/calspy_screenshot.png)
 
 ## Features
 
@@ -10,7 +10,7 @@ calspy is a tool for investigative journalists and OSINT researchers to scrape e
 - Saves calendart events in JSON format
 - Generates an HTML file for your target's calendar to easily browse and search all events
 
-![calspy results page](screenshots/results.png)
+![calspy results page](screenshots/calspy_results.png)
 
 ## Requirements
 
