@@ -54,7 +54,6 @@ ENV/
 
 # Project specific
 target_calendar.txt
-*.html
 *.log
 calendars/
 
@@ -65,3 +64,7 @@ Thumbs.db
 # Logs
 logs/
 *.log 
+
+# HTML files except templates
+*.html
+!src/templates/*.html
