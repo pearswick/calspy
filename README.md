@@ -1,12 +1,4 @@
-# calspy v0.1.0
-
- ██████╗ █████╗ ██╗     ███████╗██████╗ ██╗   ██╗
-██╔════╝██╔══██╗██║     ██╔════╝██╔══██╗╚██╗ ██╔╝
-██║     ███████║██║     ███████╗██████╔╝ ╚████╔╝ 
-██║     ██╔══██║██║     ╚════██║██╔═══╝   ╚██╔╝  
-╚██████╗██║  ██║███████╗███████║██║        ██║   
- ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝        ╚═╝   
-
+# calspy 
 
 calspy is a tool for investigative journalists and OSINT researchers to scrape events from a public Google Calendar.
 
