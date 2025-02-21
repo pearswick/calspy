@@ -1,14 +1,15 @@
 # calspy🗓️🕵️
 
-calspy is a tool for investigative journalists and OSINT researchers to scrape events from a public Google Calendar. It works by mimicking human action in a web browser, automating the process of clicking through each month to find events. To avoid scraping until the dawn of time,calspy stops scraping when it has found 18 consecutive months with no events.
+calspy is a tool for investigative journalists and OSINT researchers to scrape events from a public Google Calendar. It works by mimicking human action in a web browser, automating the process of clicking through each month to find events. To avoid scraping until the dawn of time, calspy stops scraping when it has found 18 consecutive months with no events.
 
 ![calspy screenshot](screenshots/calspy_screenshot.png)
 
 ## Features
 
 - Handles calendar navigation automatically
-- Saves calendart events in JSON format
-- Generates an HTML file for your target's calendar to easily browse and search all events
+- Saves calendar data in JSON format
+- Uses that data to generate HTML file for target
+- Allows you to quickly browse and search through all events
 
 ![calspy results page](screenshots/calspy_results.png)
 
@@ -16,7 +17,7 @@ calspy is a tool for investigative journalists and OSINT researchers to scrape e
 
 - Python 3.x
 - Chrome browser installed
-- Some basic knowledge of the command line
+- Target's Public Google Calendar URL
 
 ## Installation
 
@@ -56,7 +57,7 @@ The scraper works in three main phases:
 
 2. **Scraping Process**
    - Starts at current month
-   - Scrapes backward in time until year limit reached
+   - Scrapes backward in time until no events are found
    - Uses Selenium WebDriver for navigation
    - Uses BeautifulSoup for HTML parsing
 
@@ -106,17 +107,10 @@ JSON structure:
 ## Error Handling
 
 - Errors are logged to scraper_errors.log
-- Debug mode (-debug) provides detailed logging in scraper.log
 - The script handles common issues like:
   - Navigation failures
   - Network timeouts
   - Parse errors
-
-## Requirements
-
-- Python 3.7+
-- Chrome browser installed
-- Public Google Calendar URL
 
 ## Limitations
 
@@ -126,7 +120,7 @@ JSON structure:
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions are welcome! Please feel free to submit a Pull Request. DM me on Signal: pearswick.01
 
 ## License
 
