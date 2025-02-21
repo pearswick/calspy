@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar events for {{ test_data.calendar_id }}</title>
+    <!-- Add Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background: #2d3436;  /* Dark background */
+            color: #dfe6e9;  /* Light text for readability */
+            font-weight: 300;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #2d3436;  /* Match body background */
+            padding: 20px;
+            border-bottom: 1px solid #404b4d;  /* Slightly lighter border */
+            z-index: 1000;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 250px 40px 40px;
+            background: #2d3436;  /* Match body background */
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .ascii-art {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 12px;
+            color: #2eccbf;  /* Bright green */
+            margin-bottom: 1rem;
+            line-height: 1;
+            display: block;
+        }
+
+        .header h1 {
+            margin: 1rem 0;
+            color: #ccc12e;  /* Yellow-green */
+            font-size: 1.2rem;
+            font-weight: 500;
+            font-family: "Courier New", monospace;
+        }
+
+        .header p {
+            color: #ff69b4;  /* Hot pink */
+            margin: 0.5rem 0 0;
+            font-size: 0.9rem;
+            font-weight: 300;
+            font-family: "Courier New", monospace;
+        }
+
+        .date-header {
+            font-size: 1.1rem;
+            font-weight: 500;  /* Medium weight for date headers */
+            color: #1976D2;
+            margin: 1.5rem 0 0.5rem;
+        }
+
+        .event {
+            margin: 1rem 0;
+            padding: 1rem;
+            border-left: 3px solid #404b4d;  /* Slightly lighter border */
+            background: #343a3f;  /* Slightly lighter than background */
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .event:hover {
+            border-left-color: #2ecc71;  /* Bright green */
+            background: #3d4348;  /* Slightly lighter on hover */
+            transform: translateX(5px);
+        }
+
+        .event-time {
+            font-size: 0.9rem;
+            color: #78909C;
+            margin-bottom: 0.25rem;
+            font-weight: 400;  /* Regular weight for time */
+        }
+
+        .event-title {
+            font-size: 1rem;
+            font-weight: 500;  /* Medium weight for title */
+            color: #37474F;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-location {
+            font-size: 0.9rem;
+            color: #78909C;
+            font-style: italic;
+            font-weight: 300;  /* Light weight for location */
+        }
+
+        .datetime {
+            color: #2ecc71;  /* Bright green */
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            font-size: 1.1rem;
+        }
+
+        .description {
+            color: #dfe6e9;  /* Light text for readability */
+            font-weight: 300;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="ascii-art"> ██████╗ █████╗ ██╗     ███████╗██████╗ ██╗   ██╗
+██╔════╝██╔══██╗██║     ██╔════╝██╔══██╗╚██╗ ██╔╝
+██║     ███████║██║     ███████╗██████╔╝ ╚████╔╝ 
+██║     ██╔══██║██║     ╚════██║██╔═══╝   ╚██╔╝  
+╚██████╗██║  ██║███████╗███████║██║        ██║   
+ ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝╚═╝        ╚═╝   </div>
+        <h1>{{ test_data.calendar_id }}</h1>
+        <p>calspy scraped {{ test_data.events | length }} events at {{ test_data.scrape_timestamp }}</p>
+    </div>
+
+    <div class="container">
+        {% for event in test_data.events %}
+            <div class="event">
+                <div class="datetime">{{ event.datetime }}</div>
+                <div class="description">
+                    {% if event.description %}
+                        {% set desc_parts = event.description.split(" | ") %}
+                        {% for part in desc_parts %}
+                            {% if not part.startswith(event.datetime) and part != "No location" %}
+                                {{ part }}{% if not loop.last %} | {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
