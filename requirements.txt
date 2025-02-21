@@ -1,0 +1,6 @@
+setuptools
+selenium
+undetected-chromedriver==3.5.3
+beautifulsoup4
+rich
+jinja2==3.1.3
