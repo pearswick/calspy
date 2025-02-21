@@ -47,32 +47,46 @@ def generate_calendar(calendar_id, use_partial=False, console=None):
     console: Rich console object for pretty printing
     Returns: path to generated HTML file
     """
-    # Set up Jinja environment
-    env = Environment(loader=FileSystemLoader(os.path.join(os.getcwd(), 'src', 'html_template')))
-    template = env.get_template('calendar_display_template.html')
-    
-    # Load calendar data and get the directory path
-    data = load_calendar_data(calendar_id, use_partial, console)
-    base_dir = os.path.join(os.getcwd(), 'calendars', calendar_id)
-    timestamp_dir = max([os.path.join(base_dir, d) for d in os.listdir(base_dir)], key=os.path.getmtime)
-    
-    # Render template with data
-    html_output = template.render(test_data=data)
-    
-    # Generate output filename and save in the timestamp directory
-    output_filename = f"{calendar_id}.html"
-    output_path = os.path.join(timestamp_dir, output_filename)
-    
-    # Write to output file
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(html_output)
-    
-    if console:
-        console.print(f"[green]Calendar HTML has been generated as:[/] [blue]{output_path}[/]")
-    else:
-        print(f"Calendar HTML has been generated as: {output_path}")
-    
-    return output_path
+    try:
+        # Get the absolute path to the template directory
+        current_dir = os.path.dirname(os.path.abspath(__file__))
+        template_dir = os.path.join(current_dir, 'templates')
+        
+        # Debug print to see what paths we're working with
+        print(f"Looking for template in: {template_dir}")
+        
+        # Set up Jinja environment
+        env = Environment(loader=FileSystemLoader(template_dir))
+        template = env.get_template('calendar_display_template.html')
+        
+        # Load calendar data and get the directory path
+        data = load_calendar_data(calendar_id, use_partial, console)
+        base_dir = os.path.join(os.getcwd(), 'calendars', calendar_id)
+        timestamp_dir = max([os.path.join(base_dir, d) for d in os.listdir(base_dir)], key=os.path.getmtime)
+        
+        # Render template with data
+        html_output = template.render(test_data=data)
+        
+        # Generate output filename and save in the timestamp directory
+        output_filename = f"{calendar_id}.html"
+        output_path = os.path.join(timestamp_dir, output_filename)
+        
+        # Write to output file
+        with open(output_path, 'w', encoding='utf-8') as f:
+            f.write(html_output)
+        
+        if console:
+            console.print(f"[green]Calendar HTML has been generated as:[/] [blue]{output_path}[/]")
+        else:
+            print(f"Calendar HTML has been generated as: {output_path}")
+        
+        return output_path
+    except Exception as e:
+        print(f"ERROR: Error during HTML generation: {str(e)}")
+        # Print more detailed error information
+        import traceback
+        print(traceback.format_exc())
+        return False
 
 if __name__ == "__main__":
     import sys
